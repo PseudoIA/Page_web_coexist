@@ -178,7 +178,7 @@
     gap: 0.75rem;
     position: absolute;
     /* ¡CAMBIO! Calcula la posición desde abajo */
-    bottom: 4rem; /* Ej: 1rem por encima del player */
+    bottom: 1rem; /* Ej: 1rem por encima del player */
                                                /* Ajusta el '1rem' para la separación deseada */
     left: 0;
     width: var(--sidebar-collapsed-width);
@@ -190,7 +190,7 @@
     justify-content: center;
     gap: 3rem;
     width: 100%;
-    bottom: 4rem;
+    bottom: 3.5rem;
      /* Hereda el 'bottom' calculado */
 }
 
