@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coexist - Banda</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Barra lateral -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo-container">
+                <img src="images/logo-image.png" alt="Coexist Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="/" data-link><i class="fas fa-home"></i>Inicio</a></li>
+                <li><a href="/about" data-link><i class="fas fa-users"></i>Quienes Somos</a></li>
+                <li><a href="/lanzamientos" data-link><i class="fas fa-music"></i>Lanzamientos</a></li>
+                <li><a href="/merch" data-link><i class="fas fa-tshirt"></i>Merch</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1AJsXa5MGR/" class="social-icon" aria-label="Facebook">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.facebook.com/share/1AJsXa5MGR/" class="social-icon" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://open.spotify.com/intl-es/artist/7aQGGh29PQNXpnPpay9czO?si=eM4R93jgS7iyowq3fjqbQg" class="social-icon" aria-label="Spotify">
+                    <i class="fab fa-spotify"></i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main id="app-content" class="main-content">
+            <!-- El contenido se insertará dinámicamente desde gallery.js -->
+        </main>
+
+        <!-- Reproductor de Spotify -->
+        <div id="spotify-embed-container" class="spotify-player">
+            <!-- El reproductor se insertará dinámicamente desde gallery.js -->
+        </div>
+    </div>
+
+    <!-- Scripts de la aplicación -->
+    <script src="https://open.spotify.com/embed/playlist/$2" async></script>
+    <script type="module" src="js/app.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html> 

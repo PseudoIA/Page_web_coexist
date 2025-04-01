@@ -1,0 +1,292 @@
+:root {
+    --primary-color: #ffffff98;
+    --background-color: #121212;
+    --text-color: #FFFFFF;
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 60px;
+    --player-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: transparent;
+    color-scheme: transparent;
+
+    padding: 2rem 1rem;
+    width: var(--sidebar-collapsed-width);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.sidebar:hover {
+    width: var(--sidebar-width);
+    padding: 2rem;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .logo-container {
+    opacity: 1;
+}
+
+.logo {
+    max-width: 70px;
+    height: auto;
+}
+
+.nav-links {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.nav-links li {
+    position: relative;
+    width: 100%;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.nav-links a i {
+    width: 30px;
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.nav-links a:hover {
+    color: rgba(163, 0, 0, 0.849);
+    border-radius: 5px;
+    transition: color 0.3s ease;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .social-links {
+    opacity: 1;
+}
+
+.social-icon {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color:  rgba(163, 0, 0, 0.849);
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    margin-left: 60px; /* Ancho de la barra lateral */
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.sidebar:hover ~ .main-content {
+    margin-left: var(--sidebar-width);
+}
+
+/* Contenedor de imágenes */
+.image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.image-item img {
+    width: 100%;          /* Haz que la imagen ocupe el 100% del ancho del contenedor (.image-item) */
+    height: 100%;         /* Haz que la imagen ocupe el 100% del alto del contenedor (.image-item) */
+    object-fit: cover;    /* Redimensiona la imagen para mantener su relación de aspecto */
+                          /* mientras llena el contenedor. Se recortará si es necesario. */
+    /* max-height: 100vh; */ /* Ya no son necesarios con width/height 100% y object-fit */
+    /* max-width: 100%;  */ /* Ya no son necesarios con width/height 100% y object-fit */
+    object-position: 50% 20%;
+    position: absolute;   /* Asegura que la imagen se posicione correctamente dentro del .image-item */
+    top: 0;
+    left: 0;
+}
+
+/* Puede que también necesites asegurarte de que .image-item ocupe todo el espacio */
+/* de .image-container si quieres que la imagen llene toda la pantalla principal */
+.image-item {
+    position: absolute;
+    top: 0;              /* Posiciona el contenedor del item en la esquina superior izquierda */
+    left: 0;
+    width: 100%;         /* Haz que el contenedor del item ocupe todo el ancho */
+    height: 100%;        /* Haz que el contenedor del item ocupe todo el alto */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /* transform: translate(-50%, -50%); */ /* Ya no es necesario si quieres que ocupe todo */
+}
+
+.image-item.active {
+    opacity: 1;
+}
+
+/* Título y subtítulo */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    pointer-events: none;
+}
+
+.hero-text h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero-text p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    opacity: 0.9;
+}
+
+/* Overlay para mejorar la legibilidad del texto */
+.image-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(0,0,0,0.7) 0%,
+        rgba(0,0,0,0.3) 50%,
+        rgba(0,0,0,0.7) 100%
+    );
+    pointer-events: none;
+}
+
+/* Spotify Player Styles */
+.spotify-player {
+    grid-column: 2;
+    background-color: #000000;
+    position: fixed;
+    bottom: 0;
+    left: var(--sidebar-collapsed-width);
+    right: 0;
+    height: var(--player-height);
+    z-index: 1000;
+    transition: left 0.3s ease;
+
+}
+
+.sidebar:hover ~ .spotify-player {
+    left: var(--sidebar-width);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: var(--sidebar-collapsed-width) 1fr;
+    }
+
+    .sidebar {
+        width: var(--sidebar-collapsed-width);
+    }
+
+    .sidebar:hover {
+        width: var(--sidebar-width);
+    }
+
+    .main-content {
+        .main-content {
+        flex: 1;
+        margin-left: var(--sidebar-collapsed-width); /* Ajusta según el estado del sidebar */
+        position: relative;
+        /* height: 100vh; */ /* Quitar height fija puede ayudar si quieres que crezca */
+        min-height: calc(100vh - var(--player-height)); /* Asegura altura mínima descontando el player */
+        overflow-y: auto; /* Permite scroll vertical si el contenido es largo */
+        padding-bottom: var(--player-height); /* Añade espacio abajo para que el player no tape contenido */
+        background-color: #000000;
+        transition: margin-left 0.3s ease; /* Añadido para suavizar cambio de margen */
+        }
+    }
+
+    .spotify-player {
+        left: var(--sidebar-collapsed-width);
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.full-height {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/* Estilos para las vistas */
+.home-view, .about-view, .lanzamientos-view, .merch-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #000000;
+} 
