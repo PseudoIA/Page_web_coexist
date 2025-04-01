@@ -67,7 +67,9 @@
     top: 0;
     border-radius: 0px 10px 10px 0px;
     z-index: 1000; /* Encima de contenido y fondo */
-  
+        /* --- ¡Flexbox Layout Principal! --- */
+    display: flex;             /* Habilita Flexbox */
+    flex-direction: column;
     /* --- Transiciones y Comportamiento --- */
     padding: 2rem 0; /* Padding vertical, horizontal controlado en hijos/hover */
     transition: width 0.2s ease, padding 0.2s ease;
@@ -234,11 +236,7 @@
     padding-bottom: var(--player-height); /* Espacio para player */
   }
   /* Ajustar padding al expandir sidebar */
-  .sidebar:hover ~ .main-content {
-    padding-left: var(--sidebar-width); /* ¡CAMBIO! Ajusta padding */
-    /* margin-left ya no se usa */
-    
-}
+
   
   /* --------------------
      Imágenes de Fondo (Slideshow)
