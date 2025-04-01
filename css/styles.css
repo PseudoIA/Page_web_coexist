@@ -190,7 +190,8 @@
 
     flex-direction: row;     /* Cambia a FILA */
     justify-content: center; /* Centra horizontalmente */
-    gap: 1rem;               /* Espacio horizontal */
+    gap: 3rem;   
+    bottom: 3.5rem;            /* Espacio horizontal */
     width: 100%;
     
 }
@@ -323,8 +324,7 @@
     left: var(--sidebar-width);
     
     }
-    
-    
+
   /* Ya no se necesita la regla .sidebar:hover ~ .spotify-player */
   
   /* --------------------
