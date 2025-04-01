@@ -178,7 +178,7 @@
     gap: 0.75rem;
     position: absolute;
     /* ¡CAMBIO! Calcula la posición desde abajo */
-    bottom: calc(var(--player-height) - 3rem); /* Ej: 1rem por encima del player */
+    bottom: 4rem; /* Ej: 1rem por encima del player */
                                                /* Ajusta el '1rem' para la separación deseada */
     left: 0;
     width: var(--sidebar-collapsed-width);
@@ -211,13 +211,7 @@
 }
 
 /* --- Icono Social al expandir Sidebar --- */
-.sidebar:hover .social-icon {
-    opacity: 1; /* Asegurar que sea visible */
-    transform: scale(1); /* Asegurar tamaño normal */
-    /* ¡CLAVE! Añadir un pequeño RETRASO a la aparición */
-    transition-delay: 0.9s; /* Espera 100ms antes de aplicar opacidad/transform */
-                          /* Ajusta este valor si quieres más/menos retraso */
-}
+
   
   /* --------------------
      Contenido Principal
