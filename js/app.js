@@ -7,12 +7,12 @@ let spotifyController = null;
 // Lista de imágenes disponibles
 const availableImages = [
    
-    'Anthellar-Yop-3 (1).png',
-    'Anthellar-Luz-2 (1).png',
-    'Anthellar-Josh-2 (1).png',
-    'Anthellar-Emma-4 (1).png',
-    'Anthellar-Brayan (1).png',
-    'Alejo-Pro.png'
+    'Anthellar-Yop-3 (1).webp',
+    'Anthellar-Luz-2 (1).webp',
+    'Anthellar-Josh-2 (1).webp',
+    'Anthellar-Emma-4 (1).webp',
+    'Anthellar-Brayan (1).webp',
+    'Alejo-Pro.webp'
 ];
 
 let currentImageIndex = 0;
