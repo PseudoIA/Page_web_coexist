@@ -1,292 +1,369 @@
-:root {
+/* styles.css - VERSIÓN COMPLETA Y CORREGIDA */
+
+/* --------------------
+   Variables Globales
+   -------------------- */
+   :root {
     --primary-color: #ffffff98;
-    --background-color: #121212;
+    --background-color: #121212; /* Color de fondo si falla imagen principal */
     --text-color: #FFFFFF;
+    --hover-color: rgba(163, 0, 0, 0.849); /* Color rojo para hover */
+    --hover-bg-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para hover en enlaces */
     --sidebar-width: 250px;
     --sidebar-collapsed-width: 60px;
     --player-height: 80px;
-}
-
-* {
+    --sidebar-bg-color: rgba(20, 20, 20, 0.7);  /* Fondo semi-transparente sidebar ¡IMPORTANTE PARA BLUR! */
+    --player-bg-color: rgba(18, 18, 18, 0.85);  /* Fondo semi-transparente player */
+    --blur-intensity: 10px;                    /* Intensidad del blur */
+    --icon-width: 30px;                        /* Ancho del área del icono */
+    --sidebar-h-padding-expanded: 1.5rem;      /* Padding horizontal sidebar expandida */
+  }
+  
+  /* --------------------
+     Reset Básico
+     -------------------- */
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  /* --------------------
+     Estilos del Body
+     -------------------- */
+  body {
     font-family: 'Arial', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
-}
-
-.app-container {
+    overflow: hidden; /* Evita barras de scroll en body */
+  }
+  
+  /* --------------------
+     Contenedor Principal de la App
+     -------------------- */
+  .app-container {
     display: flex;
     min-height: 100vh;
     position: relative;
-}
-
-/* Sidebar Styles */
-.sidebar {
-    background-color: transparent;
-    color-scheme: transparent;
-
-    padding: 2rem 1rem;
+  }
+  
+  /* --------------------
+     Barra Lateral (Sidebar)
+     -------------------- */
+  .sidebar {
+    /* --- Aspecto --- */
+    background-color: var(--sidebar-bg-color); /* Fondo semi-transparente ¡NECESARIO! */
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    /* color-scheme: transparent; */ /* Puedes quitar esta línea */
+  
+    /* --- Posicionamiento y Dimensiones --- */
     width: var(--sidebar-collapsed-width);
     height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
-    transition: all 0.2s ease;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.sidebar:hover {
+    border-radius: 0px 10px 10px 0px;
+    z-index: 1000; /* Encima de contenido y fondo */
+  
+    /* --- Transiciones y Comportamiento --- */
+    padding: 2rem 0; /* Padding vertical, horizontal controlado en hijos/hover */
+    transition: width 0.2s ease, padding 0.2s ease;
+    overflow: hidden; /* Oculta texto al colapsar */
+  }
+  
+  .sidebar:hover {
     width: var(--sidebar-width);
-    padding: 2rem;
-}
-
-.logo-container {
+    padding: 2rem var(--sidebar-h-padding-expanded); /* Padding normal al expandir */
+  }
+  
+  /* --- Contenido del Sidebar --- */
+  .logo-container {
     text-align: center;
-    margin-bottom: 2rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    margin-bottom: 2rem; /* Espacio debajo del logo */
+    padding: 0 1rem;     /* Padding horizontal para que no pegue a bordes */
+    /* opacity: 0; */       /* ¡QUITADO! Para que sea visible por defecto */
+    /* transition: opacity 0.3s 0.1s ease; */ /* Ya no se necesita */
+    /* Añadir altura mínima si es necesario para evitar saltos */
+    min-height: 50px; /* O la altura que consideres apropiada */
+    display: flex; /* Usar flex para centrar verticalmente si es necesario */
+    align-items: center;
+    justify-content: center;
 }
 
-.sidebar:hover .logo-container {
-    opacity: 1;
-}
 
 .logo {
-    max-width: 70px;
-    height: auto;
+    display: block; /* Importante */
+    /* margin: 0 auto; */ /* Quitado si usamos flex en el contenedor */
+    /* ¡CAMBIO! Tamaño por defecto igual al icono */
+    max-width: var(--icon-width, 30px);
+    height: auto; /* Mantiene proporción */
+    transition: max-width 0.2s ease; /* Transición suave del tamaño */
 }
 
+/* Se mantiene la regla para agrandar en hover */
+.sidebar:hover .logo {
+    /* Más grande al expandir (ajústalo si es necesario) */
+    max-width: 120px; /* Ejemplo: un poco más pequeño que 150px */
+}
+
+/* Ajusta el margen superior de los enlaces si es necesario */
+/* Ajusta el margen superior de los enlaces si es necesario */
 .nav-links {
     list-style: none;
-    margin-bottom: 2rem;
+    margin: 0;
+    padding: 0;
+    margin-top: rem; /* Reducir espacio si el logo ocupa menos */
 }
 
-.nav-links li {
-    position: relative;
-    width: 100%;
-}
 
-.nav-links a {
+  
+  /* Enlace <a> por defecto (Colapsado) */
+  .nav-links a {
     color: var(--text-color);
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 0.8rem;
-    transition: color 0.3s ease;
+    justify-content: center; /* Centra icono */
+    /* height: 50px; */ /* Quitado para altura flexible */
+    padding: 0.8rem 0; /* Padding vertical, SIN horizontal */
+    transition: color 0.3s ease, background-color 0.3s ease, justify-content 0.2s ease, padding 0.2s ease;
     font-size: 1.1rem;
     white-space: nowrap;
-}
-
-.nav-links a i {
-    width: 30px;
-    text-align: center;
-    margin-right: 1rem;
-}
-
-.nav-links a:hover {
-    color: rgba(163, 0, 0, 0.849);
+    overflow: hidden;
+    border-radius: 0px;
+  }
+  /* Enlace <a> al expandir Sidebar */
+  .sidebar:hover .nav-links a {
+    justify-content: flex-start; /* Alinea izquierda */
+    padding: 0.8rem var(--sidebar-h-padding-expanded); /* Padding normal */
     border-radius: 5px;
-    transition: color 0.3s ease;
-}
-
+  }
+  
+  /* Icono <i> */
+  .nav-links a i {
+    width: var(--icon-width);
+    text-align: center;
+    flex-shrink: 0;
+    margin: 0; /* Sin márgenes extra */
+  }
+  
+  /* Texto <span> (REQUIERE SPAN en HTML) */
+  .nav-links a span {
+    display: none; /* Oculto por defecto */
+    margin-left: 1rem;
+    white-space: nowrap;
+  }
+  /* Texto <span> al expandir Sidebar */
+  .sidebar:hover .nav-links a span {
+    display: inline; /* Mostrar */
+  }
+  
+  /* Hover sobre enlace individual <a> */
+  .nav-links a:hover {
+    color: var(--hover-color);
+    background-color: var(--hover-bg-color);
+  }
+  
+  /* Enlaces Sociales */
+/* --- Enlaces Sociales --- */
 .social-links {
+    
     display: flex;
-    justify-content: center;
-    gap: 1rem;
+    flex-direction: column; /* Por defecto: COLUMNA */
+    align-items: center;    /* Centra horizontal */
+    gap: 0.75rem;           /* Espacio vertical */
     position: absolute;
     bottom: 2rem;
     left: 0;
-    right: 0;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    width: var(--sidebar-collapsed-width);
+    opacity: 1; /* Visible por defecto */
+    
+    /* No añadir transición de opacidad aquí */
 }
 
 .sidebar:hover .social-links {
-    opacity: 1;
+
+    flex-direction: row;     /* Cambia a FILA */
+    justify-content: center; /* Centra horizontalmente */
+    gap: 1rem;               /* Espacio horizontal */
+    width: 100%;
+    
 }
 
+/* --- Icono Social Individual --- */
 .social-icon {
+    
     color: var(--text-color);
     font-size: 1.5rem;
-    transition: color 0.3s ease;
+    opacity: 1; /* Visible por defecto */
+    transform: scale(1); /* Tamaño normal */
+    /* Transición para color, opacidad y transformación */
+    transition: color 0.3s ease,
+                opacity 0.15s ease-in-out,
+                transform 0.15s ease-in-out;
+    /* Retraso inicial CERO por defecto */
+    transition-delay: 0s;
+    
 }
 
-.social-icon:hover {
-    color:  rgba(163, 0, 0, 0.849);
+/* --- Icono Social al expandir Sidebar --- */
+.sidebar:hover .social-icon {
+    opacity: 1; /* Asegurar que sea visible */
+    transform: scale(1); /* Asegurar tamaño normal */
+    /* ¡CLAVE! Añadir un pequeño RETRASO a la aparición */
+    transition-delay: 0.9s; /* Espera 100ms antes de aplicar opacidad/transform */
+                          /* Ajusta este valor si quieres más/menos retraso */
 }
-
-/* Main Content Styles */
-.main-content {
-    flex: 1;
-    margin-left: 60px; /* Ancho de la barra lateral */
-    position: relative;
-    height: 100vh;
+  
+  /* --------------------
+     Contenido Principal
+     -------------------- */
+  .main-content {
+    flex: 1; /* Ocupa espacio restante */
+    padding-left: var(--sidebar-collapsed-width); /* ¡CAMBIO! Padding en lugar de margin */
+    position: relative; /* Para z-index */
+    min-height: 100vh;
+    background-color: transparent; /* ¡CAMBIO! Transparente */
+    overflow-x: hidden;
+    overflow-y: auto; /* Scroll vertical */
+    transition: padding-left 0.2s ease; /* Transición padding */
+    z-index: 1; /* Encima de fondo (-1), debajo de sidebar/player (1000) */
+    padding-bottom: var(--player-height); /* Espacio para player */
+  }
+  /* Ajustar padding al expandir sidebar */
+  .sidebar:hover ~ .main-content {
+    padding-left: var(--sidebar-width); /* ¡CAMBIO! Ajusta padding */
+    /* margin-left ya no se usa */
+    
+}
+  
+  /* --------------------
+     Imágenes de Fondo (Slideshow)
+     -------------------- */
+  .image-container {
+    position: fixed; /* ¡CAMBIO! Fijo a pantalla */
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;   /* ¡CAMBIO! Detrás de todo */
     overflow: hidden;
-    background-color: #000000;
-}
-
-.sidebar:hover ~ .main-content {
-    margin-left: var(--sidebar-width);
-}
-
-/* Contenedor de imágenes */
-.image-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    background-color: #000000;
-}
-
-.image-item img {
-    width: 100%;          /* Haz que la imagen ocupe el 100% del ancho del contenedor (.image-item) */
-    height: 100%;         /* Haz que la imagen ocupe el 100% del alto del contenedor (.image-item) */
-    object-fit: cover;    /* Redimensiona la imagen para mantener su relación de aspecto */
-                          /* mientras llena el contenedor. Se recortará si es necesario. */
-    /* max-height: 100vh; */ /* Ya no son necesarios con width/height 100% y object-fit */
-    /* max-width: 100%;  */ /* Ya no son necesarios con width/height 100% y object-fit */
-    object-position: 50% 20%;
-    position: absolute;   /* Asegura que la imagen se posicione correctamente dentro del .image-item */
-    top: 0;
-    left: 0;
-}
-
-/* Puede que también necesites asegurarte de que .image-item ocupe todo el espacio */
-/* de .image-container si quieres que la imagen llene toda la pantalla principal */
-.image-item {
-    position: absolute;
-    top: 0;              /* Posiciona el contenedor del item en la esquina superior izquierda */
-    left: 0;
-    width: 100%;         /* Haz que el contenedor del item ocupe todo el ancho */
-    height: 100%;        /* Haz que el contenedor del item ocupe todo el alto */
+    background-color: #000000; /* Fondo si falla imagen */
+  }
+  .image-item {
+    position: absolute; /* Dentro de image-container */
+    top: 0; left: 0; width: 100%; height: 100%;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    /* transform: translate(-50%, -50%); */ /* Ya no es necesario si quieres que ocupe todo */
-}
-
-.image-item.active {
+    transition: opacity 0.7s ease-in-out;
+  }
+  .image-item.active {
     opacity: 1;
-}
-
-/* Título y subtítulo */
-.hero-text {
+  }
+  .image-item img {
+    width: 100%; height: 100%;
+    object-fit: cover; /* Cubre área */
+    object-position: 20% 20%; /* Ajustable (ej: 50% 20%) */
+  }
+  /* Overlay oscuro opcional */
+  .image-item::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+  }
+  
+  /* --------------------
+     Texto Hero (Si se usa sobre fondo)
+     -------------------- */
+  .hero-text {
+    position: fixed; /* O absoluto a .app-container */
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: white;
-    z-index: 2;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 0; /* Encima de .image-container (-1), debajo de .main-content (1) */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     pointer-events: none;
-}
-
-.hero-text h1 {
-    font-size: clamp(2rem, 5vw, 4rem);
-    margin-bottom: 1rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-
-.hero-text p {
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    opacity: 0.9;
-}
-
-/* Overlay para mejorar la legibilidad del texto */
-.image-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        0deg,
-        rgba(0,0,0,0.7) 0%,
-        rgba(0,0,0,0.3) 50%,
-        rgba(0,0,0,0.7) 100%
-    );
-    pointer-events: none;
-}
-
+  }
+  .hero-text h1 { font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 1rem; font-weight: 700; letter-spacing: 2px;}
+  .hero-text p { font-size: clamp(1rem, 2vw, 1.5rem); opacity: 0.9; }
+  
+  /* --------------------
+     Reproductor Spotify
+     -------------------- */
 /* Spotify Player Styles */
+
 .spotify-player {
+
     grid-column: 2;
+    
     background-color: #000000;
+    
     position: fixed;
+    
     bottom: 0;
+    
     left: var(--sidebar-collapsed-width);
+    
     right: 0;
+    
     height: var(--player-height);
+    
     z-index: 1000;
+    
     transition: left 0.3s ease;
-
-}
-
+    
+    
+    
+    }
+    
+    
+    
 .sidebar:hover ~ .spotify-player {
+    
     left: var(--sidebar-width);
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .app-container {
-        grid-template-columns: var(--sidebar-collapsed-width) 1fr;
+    
     }
-
-    .sidebar {
-        width: var(--sidebar-collapsed-width);
-    }
-
-    .sidebar:hover {
-        width: var(--sidebar-width);
-    }
-
+    
+    
+  /* Ya no se necesita la regla .sidebar:hover ~ .spotify-player */
+  
+  /* --------------------
+     Ajustes Responsivos (Básico - REVISAR)
+     -------------------- */
+  @media (max-width: 768px) {
+    /* Estos estilos probablemente necesiten revisión profunda para móvil */
     .main-content {
-        .main-content {
-        flex: 1;
-        margin-left: var(--sidebar-collapsed-width); /* Ajusta según el estado del sidebar */
-        position: relative;
-        /* height: 100vh; */ /* Quitar height fija puede ayudar si quieres que crezca */
-        min-height: calc(100vh - var(--player-height)); /* Asegura altura mínima descontando el player */
-        overflow-y: auto; /* Permite scroll vertical si el contenido es largo */
-        padding-bottom: var(--player-height); /* Añade espacio abajo para que el player no tape contenido */
-        background-color: #000000;
-        transition: margin-left 0.3s ease; /* Añadido para suavizar cambio de margen */
-        }
+       /* El padding podría ser 0 si el sidebar se oculta o cambia */
+       padding-left: var(--sidebar-collapsed-width); /* Mantener si sidebar sigue visible y fija */
     }
-
-    .spotify-player {
-        left: var(--sidebar-collapsed-width);
-    }
-}
-
-/* Animations */
-@keyframes fadeIn {
+    /* Ajustes dentro de .main-content anidados incorrectamente en tu código original */
+    /* No anidar reglas dentro de media queries así */
+  }
+  
+  /* --------------------
+     Animaciones (Si se usan)
+     -------------------- */
+  @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-.full-height {
-    height: 100%;
-    width: 100%;
-    position: relative;
-}
-
-/* Estilos para las vistas */
-.home-view, .about-view, .lanzamientos-view, .merch-view {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    background-color: #000000;
-} 
+  }
+  
+  /* --------------------
+     Estilos Específicos de Vistas (Dentro de .main-content)
+     -------------------- */
+  .home-view, .about-view, .lanzamientos-view, .merch-view {
+    position: relative; /* Para contenido interno */
+    padding: 2rem;      /* Padding interno */
+    color: var(--text-color); /* Asegurar color texto */
+    /* Quitar background y height fija */
+  }
+  /* Estilos adicionales específicos */
+  .about-view h2, .lanzamientos-view h2, .merch-view h2 {
+    margin-bottom: 1.5rem;
+  }
+  .about-content p {
+     margin-bottom: 1rem;
+  }
+  /* ... otros estilos específicos .releases-grid, .merch-grid, etc ... */

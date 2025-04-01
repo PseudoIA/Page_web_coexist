@@ -61,6 +61,7 @@ function lanzamientosView() {
         <div class="lanzamientos-view full-height">
             <h2>Lanzamientos</h2>
             <div class="releases-grid">
+            
                 <div class="release-card" data-spotify-uri="spotify:album:0JGOiO34nwfUdDrD612dOp">
                      <p>Próximamente...</p>
                 </div>
@@ -139,12 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al inicializar el reproductor de Spotify:', error);
         });
 
-    // Event delegation para los enlaces de navegación
+    // Event delegation para los enlaces de navegación CORREGIDO
     document.addEventListener('click', e => {
-        if (e.target.matches('[data-link]')) {
-            e.preventDefault();
-            const href = e.target.getAttribute('href');
-            navigateTo(href);
+        // Busca el enlace <a> ancestro más cercano que tenga [data-link]
+        const link = e.target.closest('a[data-link]');
+
+        // Si se encontró un enlace (si link no es null)
+        if (link) {
+            e.preventDefault(); // Prevenir navegación normal
+            const href = link.getAttribute('href'); // Obtener href del enlace encontrado
+            console.log("Navegando a:", href); // Opcional: para depurar
+            navigateTo(href); // Llamar a tu función de navegación SPA
         }
     });
 
