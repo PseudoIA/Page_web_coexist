@@ -172,28 +172,26 @@
   /* Enlaces Sociales */
 /* --- Enlaces Sociales --- */
 .social-links {
-    
     display: flex;
-    flex-direction: column; /* Por defecto: COLUMNA */
-    align-items: center;    /* Centra horizontal */
-    gap: 0.75rem;           /* Espacio vertical */
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
     position: absolute;
-    bottom: 2rem;
+    /* ¡CAMBIO! Calcula la posición desde abajo */
+    bottom: calc(var(--player-height) - 3rem); /* Ej: 1rem por encima del player */
+                                               /* Ajusta el '1rem' para la separación deseada */
     left: 0;
     width: var(--sidebar-collapsed-width);
-    opacity: 1; /* Visible por defecto */
-    
-    /* No añadir transición de opacidad aquí */
+    opacity: 1;
 }
 
 .sidebar:hover .social-links {
-
-    flex-direction: row;     /* Cambia a FILA */
-    justify-content: center; /* Centra horizontalmente */
-    gap: 3rem;   
-    bottom: 3.5rem;            /* Espacio horizontal */
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
     width: 100%;
-    
+    bottom: 4rem;
+     /* Hereda el 'bottom' calculado */
 }
 
 /* --- Icono Social Individual --- */
