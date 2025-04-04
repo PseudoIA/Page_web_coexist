@@ -253,7 +253,8 @@
   .image-item img {
     width: 100%; height: 100%;
     object-fit: cover; /* Cubre área */
-    object-position: 20% 20%; /* Ajustable (ej: 50% 20%) */
+    object-position: 90% 10%; /* Ajustable (ej: 50% 20%) */
+    opacity: 0.5;
   }
   /* Overlay oscuro opcional */
   .image-item::after {
@@ -343,15 +344,23 @@
   /* --------------------
      Estilos Específicos de Vistas (Dentro de .main-content)
      -------------------- */
+     .merch-card {
+      /* ... otros estilos ... */
+      max-width: 400px; /* <-- Limita el ancho máximo */
+      width: 90%;       /* <-- Usa el 90% del espacio, hasta 400px */
+      /* ... otros estilos ... */
+    }
   .home-view, .about-view, .lanzamientos-view, .merch-view {
     position: relative; /* Para contenido interno */
     padding: 2rem;      /* Padding interno */
     color: var(--text-color); /* Asegurar color texto */
+    text-align: center;
     /* Quitar background y height fija */
   }
   /* Estilos adicionales específicos */
   .about-view h2, .lanzamientos-view h2, .merch-view h2 {
     margin-bottom: 1.5rem;
+    text-align: center; 
   }
   .about-content p {
      margin-bottom: 1rem;

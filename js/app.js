@@ -74,9 +74,9 @@ function lanzamientosView() {
 function merchView() {
     return `
         <div class="merch-view full-height">
-            <h2>Merchandising</h2>
+            <!-- <h2>Merchandising</h2> -->
             <div class="merch-grid">
-                <p>Próximamente...</p>
+                 <img src="./images/merch1.jpg" alt="Merch Item 1"> 
             </div>
         </div>
     `;
